@@ -9,9 +9,9 @@ in this project. Let's do this.
 
 Open a console and run the following command:
 
-For Linux: ``$pip3 install -r requirements.txt``
+For Linux: ``pip3 install -r requirements.txt``
 
-For Windows: ``$pip install -r requirements.txt``
+For Windows: ``pip install -r requirements.txt``
 
 ## Running the project
 With all dependencies installed, simply execute the main file:

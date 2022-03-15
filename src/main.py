@@ -1,6 +1,11 @@
+from itertools import groupby
+from operator import itemgetter
+
+from aenum import MultiValueEnum
 from dotenv import load_dotenv
 from pandas import DataFrame
 from sklearn.cluster import KMeans
+from termcolor import colored
 
 from configurations import Configurations
 from src.repository.happiness_csv_repository import HappinessCSVRepository
@@ -17,6 +22,17 @@ load_dotenv()
 
 def custom_print(inp: str, out: str) -> None:
     print(f"Group {out} -> {inp} ")
+
+
+class GroupColorsEnum(MultiValueEnum):
+    green = 0, 8
+    red = 1, 9
+    blue = 2
+    yellow = 3
+    grey = 4
+    cyan = 5
+    magenta = 6
+    white = 7
 
 
 if __name__ == '__main__':
@@ -45,8 +61,22 @@ if __name__ == '__main__':
     kmeans.fit(new_training_df)
 
     # Predict
+    training_predictions = kmeans.predict(new_training_df)
     test_predictions = kmeans.predict(new_test_df)
 
-    # Print
+    # Formating training data to print
+    formated_training_data = [(out, inp) for inp, out in
+                              zip(training_dataframe["Country or region"], training_predictions)]
+    formated_training_data.sort(key=itemgetter(0))
+    groups = groupby(formated_training_data, itemgetter(0))
+    grouped_by_prediction = [[item[1] for item in data] for (key, data) in groups]
+
+    # Print Training Results
+    for group in range(len(grouped_by_prediction)):
+        print(colored(f"Group {group}", GroupColorsEnum(group).name))
+        print(colored(str([country for country in set(grouped_by_prediction[group])]),
+                      GroupColorsEnum(group).name))
+
+    # Print Test Results
     [custom_print(inp, out) for inp, out in
      zip(test_dataframe["Country or region"], test_predictions)]
