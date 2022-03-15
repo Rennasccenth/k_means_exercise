@@ -1,7 +1,5 @@
-from typing import List, Hashable
-
 import pandas as pd
-from pandas import Series, DataFrame
+from pandas import DataFrame
 
 
 class HappinessCSVRepository:

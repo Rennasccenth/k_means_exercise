@@ -38,12 +38,6 @@ if __name__ == '__main__':
     # Fetch TEST data.
     test_dataframe: DataFrame = test_repository.get_data()
 
-    # Pre-processing data, using OneHotEncoder to transform from string(cathegorical) domain to
-    # numbers, we will invert that later.
-    # encoder = OneHotEncoder()
-    # training_dataframe_encoded = encoder.fit_transform(training_dataframe)
-    # test_dataframe_encoded = encoder.transform(test_dataframe)
-
     new_training_df = training_dataframe.drop(columns=["Country or region"])
     new_test_df = test_dataframe.drop(columns=["Country or region"])
 
