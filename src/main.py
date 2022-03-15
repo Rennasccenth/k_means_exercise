@@ -1,13 +1,6 @@
-from typing import Tuple
-
-import numpy as np
-import pandas as pd
 from dotenv import load_dotenv
-from matplotlib import pyplot as plt
 from pandas import DataFrame
 from sklearn.cluster import KMeans
-from sklearn.datasets import make_blobs
-from sklearn.preprocessing import *
 
 from configurations import Configurations
 from src.repository.happiness_csv_repository import HappinessCSVRepository
