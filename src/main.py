@@ -1,11 +1,12 @@
-from itertools import groupby
-from operator import itemgetter
-
 from aenum import MultiValueEnum
+from operator import itemgetter
+from itertools import groupby
+
+from termcolor import colored
 from dotenv import load_dotenv
 from pandas import DataFrame
 from sklearn.cluster import KMeans
-from termcolor import colored
+from collections import defaultdict
 
 from configurations import Configurations
 from src.repository.happiness_csv_repository import HappinessCSVRepository
@@ -64,7 +65,7 @@ if __name__ == '__main__':
     training_predictions = kmeans.predict(new_training_df)
     test_predictions = kmeans.predict(new_test_df)
 
-    # Formating training data to print
+    # Formating training data to printing
     formated_training_data = [(out, inp) for inp, out in
                               zip(training_dataframe["Country or region"], training_predictions)]
     formated_training_data.sort(key=itemgetter(0))
